@@ -1,10 +1,12 @@
 <h1>Order a pizza</h1>
 
 <h2>{{ note }}</h2>
-
-<form action="{% url 'order' %}" method="post">
+<!-- enctype="multipart/form-data" for customer uploading files  -->
+<form action="{% url 'order' %}" method="post"> 
     {% csrf_token %}
     {{ pizzaform }}
+
+
      <!-- All of the below code was done through django forms on forms.py -->
 
     <!-- <label for="topping1">Topping 1: </label>
@@ -20,5 +22,15 @@
 
 
     <input type="submit" value="Order Pizza">
+
+</form>
+
+<br><br>
+
+Want more than one pizza?
+
+<form action="{% url 'pizzas' %}" method="get">
+{{ multiple_form }}
+<input type ="submit" value="Get pizzas">
 
 </form>
