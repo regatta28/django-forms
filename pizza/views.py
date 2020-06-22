@@ -13,11 +13,15 @@ def order(request):
         if filled_form.is_valid():
             created_pizza = filled_form.save()
             created_pizza_pk = created_pizza.id
-            note = 'Thanks for Ordering, your %s %s and %s pizza is on the way!' %(filled_form.cleaned_data['size'],
+            note = 'Thank you, your %s %s and %s pizza is on the way!' %(filled_form.cleaned_data['size'],
             filled_form.cleaned_data['topping1'],
             filled_form.cleaned_data['topping2'],)
             new_form = PizzaForm()
-            return render(request, 'pizza/order.html', {'created_pizza_pk':created_pizza_pk,'pizzaform':new_form, 'note':note, 'multiple_form': multiple_form})
+        else:
+            created_pizza_pk = None
+            note = 'Pizza order is not complete...'
+            return render(request, 'pizza/order.html', {'created_pizza_pk': created_pizza_pk, 'pizzaform': filled_form, 'note':note})
+        return render(request, 'pizza/order.html', {'created_pizza_pk':created_pizza_pk,'pizzaform':new_form, 'note':note, 'multiple_form': multiple_form})
     else:
         form = PizzaForm()
         return render(request, 'pizza/order.html', {'pizzaform': form, 'multiple_form':multiple_form})

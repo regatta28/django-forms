@@ -11,7 +11,8 @@ from .models import Pizza, Size
 
 
 class PizzaForm(forms.ModelForm):
-
+    # email = forms.EmailField()
+    # url = forms.URLField()
     # image = forms.ImageField()
     # size = forms.ModelChoiceField(queryset=Size.objects, empty_label=None, widget=forms.RadioSelect)
     class Meta:
